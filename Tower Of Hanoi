@@ -1,0 +1,19 @@
+class Solution {
+
+    public int towerOfHanoi(int n, int from, int to, int aux) {
+        int moves[] = new int[1];
+        tower(n, from, to, aux, moves);
+        return moves[0];
+    }
+    
+    public void tower(int n, int from, int to, int aux, int moves[]) {
+        if(n == 0) {
+            return;
+        }
+        
+        moves[0]++;
+        tower(n-1, from, aux, to, moves);
+        // System.out.println("move disk " + n + " from rod " + from + " to rod " + to);
+        tower(n-1, aux, to, from, moves);
+    } 
+}
