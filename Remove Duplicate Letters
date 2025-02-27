@@ -1,0 +1,44 @@
+public class Solution 
+{
+    public static String removeDuplicates(String str) 
+    {
+        StringBuilder sb = new StringBuilder();
+        boolean map[] = new boolean[26];
+        return recur(str, 0, sb, map);
+    }
+    public static String recur(String str, int idx, StringBuilder sb, boolean map[]) {
+        if(idx == str.length()) {
+            return sb.toString();
+        }
+        char ch = str.charAt(idx);
+        if(!map[ch-'a']) {
+            map[ch-'a'] = true;
+            sb.append(ch);
+        }
+        return recur(str, idx+1, sb, map);
+    }
+}
+
+
+
+
+
+
+
+
+
+class Solution {
+    String removeDuplicates(String s) {
+        HashSet<Character> set = new HashSet<>();
+        StringBuilder ans = new StringBuilder();
+        for(int i = 0; i < s.length(); i++) {
+            if(set.contains(s.charAt(i))) {
+                continue;
+            } else {
+                set.add(s.charAt(i));
+                ans.append(s.charAt(i));
+            }
+        }
+        return ans.toString();
+    }
+}
