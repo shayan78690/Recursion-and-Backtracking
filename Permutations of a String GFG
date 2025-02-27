@@ -1,0 +1,20 @@
+class Solution {
+    public ArrayList<String> findPermutation(String s) {
+        HashSet<String> set = new HashSet<>();
+        recursion(s, set, "");
+        return new ArrayList<>(set);
+    }
+    
+    public void recursion(String s, HashSet<String> set, String ans) {
+        if(s.length() == 0) {
+            set.add(ans);
+            return;
+        }
+        
+        for(int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            String newString = s.substring(0, i) + s.substring(i + 1);
+            recursion(newString, set, ans + ch);  
+        }
+    }
+}
