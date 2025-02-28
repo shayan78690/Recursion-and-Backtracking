@@ -1,0 +1,26 @@
+class Solution {
+    // Function to calculate the number of subsets with a given sum
+    public int perfectSum(int[] nums, int target) {
+        int ans_sum = 0;
+        return findAllSubsequences(nums, 0, target, ans_sum);
+    }
+    
+        public int findAllSubsequences(int nums[], int idx, int target, int ans_sum) {
+        if(idx == nums.length) {
+            if(ans_sum == target) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+        
+        ans_sum += nums[idx];
+        int l = findAllSubsequences(nums, idx+1, target, ans_sum);
+        
+        ans_sum -= nums[idx];
+        int r = findAllSubsequences(nums, idx+1, target, ans_sum);
+        
+        return l + r;
+    }
+}
