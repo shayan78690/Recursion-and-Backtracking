@@ -1,0 +1,32 @@
+class Solution {
+  public static boolean checkSubsequenceSum(int N, int[] a, int K) {
+    ArrayList<Integer> list = new ArrayList<>();
+        int sum = 0;
+        return backtrack(N, K, a, sum, list, 0);
+  }
+  
+  public static boolean backtrack(int n, int k, int a[], int sum, ArrayList<Integer> list, int idx) {
+        if(idx == a.length) {
+            if(sum == k) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        list.add(a[idx]);
+        sum += a[idx];
+        if(backtrack(n, k, a, sum, list, idx+1)) {
+            return true;
+        }
+
+        list.remove(list.size()-1);
+        sum -= a[idx];
+        if(backtrack(n, k, a, sum, list, idx+1)) {
+            return true;
+        }
+
+        return false;
+    }
+}
