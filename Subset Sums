@@ -1,0 +1,17 @@
+class Solution {
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        ArrayList<Integer> list = new ArrayList<>();
+        backtrack(0, 0, arr, list);
+        return list;
+    }
+    
+    public void backtrack(int index, int sum, int arr[], ArrayList<Integer> list) {
+        if(index == arr.length) {
+            list.add(sum);
+            return;
+        }
+        
+        backtrack(index+1, sum+arr[index], arr, list);
+        backtrack(index+1, sum, arr, list);
+    }
+}
