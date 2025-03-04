@@ -1,0 +1,60 @@
+class Main {
+    static int count = 0;
+    public static void print(char board[][], int N) {
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) {
+                System.out.print(board[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+    
+    public static boolean isSafe(char board[][], int row, int col) {
+        for(int i = row-1; i >= 0; i--) {
+            if(board[i][col] == 'Q') {
+                return false;
+            }
+        }
+        
+        for(int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) {
+            if(board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        
+        for(int i = row-1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+            if(board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static void nQueens(char board[][], int row, int N) {
+        if(row == board.length) {
+            count++;
+            return;
+        }
+        for(int col = 0; col < N; col++) {
+            if(isSafe(board, row, col)) {
+                board[row][col] = 'Q';
+                nQueens(board, row+1, N);
+                board[row][col] = '.';
+            }
+        }
+    }  
+    
+    
+    public static void main(String[] args) {
+        int N = 4;
+        char board[][] = new char[N][N];
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N; j++) {
+                board[i][j] = '.';
+            }
+        }
+        nQueens(board, 0, N);
+        System.out.print(count);
+    }
+}
