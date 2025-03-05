@@ -1,0 +1,30 @@
+class Solution {
+    public boolean checkValidGrid(int[][] grid) {
+        if (grid[0][0] != 0)
+            return false;
+        return backtrack(grid, 0, 0, 0);
+    }
+
+    public boolean backtrack(int[][] grid, int row, int col, int expectedVal) {
+        int n = grid.length;
+
+        if (row < 0 || col < 0 || row >= n || col >= n || grid[row][col] != expectedVal) {
+            return false;
+        }
+
+        if (expectedVal == n * n - 1) {
+            return true;
+        }
+
+        boolean move1 = backtrack(grid, row - 2, col + 1, expectedVal + 1);
+        boolean move2 = backtrack(grid, row - 1, col + 2, expectedVal + 1);
+        boolean move3 = backtrack(grid, row + 1, col + 2, expectedVal + 1);
+        boolean move4 = backtrack(grid, row + 2, col + 1, expectedVal + 1);
+        boolean move5 = backtrack(grid, row + 2, col - 1, expectedVal + 1);
+        boolean move6 = backtrack(grid, row + 1, col - 2, expectedVal + 1);
+        boolean move7 = backtrack(grid, row - 1, col - 2, expectedVal + 1);
+        boolean move8 = backtrack(grid, row - 2, col - 1, expectedVal + 1);
+
+        return move1 || move2 || move3 || move4 || move5 || move6 || move7 || move8;
+    }
+}
