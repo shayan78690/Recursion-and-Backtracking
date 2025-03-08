@@ -6,6 +6,7 @@ class Solution {
         return ans;
     }
 
+
     public void backtrack(int index, String s, List<List<String>> ans, List<String> list) {
         if (index == s.length()) {
             ans.add(new ArrayList<>(list));
